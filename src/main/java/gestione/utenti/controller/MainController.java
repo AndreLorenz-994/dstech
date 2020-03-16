@@ -3,6 +3,7 @@ package gestione.utenti.controller;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,9 @@ public class MainController {
 			@RequestParam String email, 
 			@RequestParam String dateOfBirth) {
 		LocalDate date = LocalDate.parse(dateOfBirth);
-		User user = new User(username, email, password, date);
+		// ASK IF CORRECT Bcrypt of the password 
+		String bcryptPass = BCrypt.hashpw(password, BCrypt.gensalt());
+		User user = new User(username, email, bcryptPass, date);
 		userService.add(user);
 		return "registration";
 	}
