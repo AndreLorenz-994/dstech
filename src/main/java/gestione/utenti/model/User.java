@@ -21,17 +21,14 @@ public class User {
 	private String email;
 	private String password;
 	
-	String pw_hash = BCrypt.hashpw(password, BCrypt.gensalt());
-	
 	@JsonFormat(pattern = "yyyy-MM-dd") // date will be formatted in yyyy-MM-dd
 	private LocalDate dateOfBirth;
 	
-	public User(long id, String username, String email, String pw_hash, LocalDate dateOfBirth) {
+	public User(String username, String email, String password, LocalDate dateOfBirth) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.email = email;
-		this.pw_hash = pw_hash;
+		this.password = password;
 		this.dateOfBirth = dateOfBirth;
 	}
 	
@@ -41,9 +38,13 @@ public class User {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password, boolean salt) {
+        if (salt) {
+            this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        } else {
+            this.password = password;
+        }
+    }
 
 	public long getId() {
 		return id;
