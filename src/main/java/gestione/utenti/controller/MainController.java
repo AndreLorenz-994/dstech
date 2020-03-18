@@ -89,11 +89,13 @@ public class MainController {
 		return "admin/modify-username";
 	}	
 	
-	@RequestMapping(value="/admin/home", method = RequestMethod.POST)
-	public String updateUsername (@RequestParam Long id, @RequestParam String username) {
+	@RequestMapping(value="/admin/modify-username", method = RequestMethod.POST)
+	public String updateUsername (@RequestParam Long id, @RequestParam String username, Model model) {
 		User updUser = userService.updateUsername(id, username);
+		model.addAttribute("id", id);
+		model.addAttribute("username", username);		
 		if(updUser == null) return "No such user";
-		return "admin/admin-home";
+		return "admin/modify-username";
 	}  
 	
 }
