@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Modify username</title>
+	</head>
+	<body>
+		<form th:action="@{/admin-home}" method="post">
+			<input type="text" name="username" th:attr="placeholder=#{username}" />
+			<input type="submit" value="Modify">
+		</form>		
+	</body>
+</html>

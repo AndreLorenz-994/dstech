@@ -7,10 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import gestione.utenti.model.User;
@@ -70,10 +74,28 @@ public class MainController {
 	    ModelAndView modelAndView = new ModelAndView();
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    User user = userService.findUserByUserName(auth.getName());
-	    modelAndView.addObject("userName", "Welcome " + user.getUsername() + " / " + user.getEmail() + ")");
+	    modelAndView.addObject("id", user.getId());
+	    modelAndView.addObject("userName", user.getUsername());
+	    modelAndView.addObject("birthDay", user.getDateOfBirth());
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
 		modelAndView.setViewName("admin/admin-home");
 	    return modelAndView;
 	}
+	
+	@RequestMapping(value="/admin/modify-username", method = RequestMethod.GET)
+	public String getParameter(@RequestParam Long id, @RequestParam String username, Model model) {
 
+		model.addAttribute("id", id);
+		model.addAttribute("username", username);
+		
+		return "admin/modify-username";
+	}	
+	
+	@RequestMapping(value="/admin/home", method = RequestMethod.POST)
+	public String updateUsername (@RequestParam Long id, @RequestParam String username) {
+		User updUser = userService.updateUsername(id, username);
+		if(updUser == null) return "No such user";
+		return "admin/home";
+	}  
+	
 }

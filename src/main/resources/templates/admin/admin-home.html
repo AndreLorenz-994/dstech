@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Admin - Homepage</title>
-</head>
-<body>
-<h1> Welcome Admin</h1>
-</body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Admin - Homepage</title>
+	</head>
+	<body>
+		<h1 th:text="'Welcome, ' + ${userName} + '!'">Welcome Admin</h1>
+		<h2 th:utext="${adminMessage}"></h2>
+		<h3>Personal Info</h3>
+		<div class="table">
+			<table>
+				<tr>
+					<td th:text="${userName}">Username</td>
+					<td>Click <a href="#" th:href="@{/admin/modify-username(id=${id}, username=${userName})}">here</a> for modify</td>
+				</tr>	
+				<tr>
+					<td th:text="${birthDay}">Birthday</td>
+					<td>Click <a href="#" th:href="@{/modify-birthday}">here</a> for modify</td>
+				</tr>								
+							
+			</table>
+		</div>
+		
+	</body>
 </html>

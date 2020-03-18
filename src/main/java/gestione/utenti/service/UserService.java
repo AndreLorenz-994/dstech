@@ -1,6 +1,7 @@
 package gestione.utenti.service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,16 @@ public class UserService {
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		return userRepository.save(user);
 	}
+	
+	public User updateUsername(Long id, String userName) {
+		Optional<User> pUser = userRepository.findById(id);
+		if(pUser.isPresent()) {
+			User user = pUser.get();
+		    user.setUsername(userName);
+		    return userRepository.save(user);	
+		} else {
+			return null;
+		}		
+	}	
 
 }
