@@ -57,9 +57,8 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-		   <groupId>nz.net.ultraq.thymeleaf</groupId>
-		   <artifactId>thymeleaf-layout-dialect</artifactId>
-		   <version>2.4.1</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>			
         <!-- bootstrap and jquery -->
 		<dependency> 

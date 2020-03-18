@@ -1,5 +1,6 @@
 package gestione.utenti.controller;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +8,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import gestione.utenti.model.User;
+import gestione.utenti.service.MailService;
 import gestione.utenti.service.UserService;
 
 @Controller
@@ -19,6 +22,9 @@ public class MainController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private MailService mailService;	
 	
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
@@ -33,12 +39,12 @@ public class MainController {
 	    ModelAndView modelAndView = new ModelAndView();
 	    User user = new User();
 	    modelAndView.addObject("user", user);
-	modelAndView.setViewName("registration");
+	    modelAndView.setViewName("registration");
 	    return modelAndView;
 	}
 	
-	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+	@PostMapping(path = "/registration")
+	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) throws MessagingException {
 	    ModelAndView modelAndView = new ModelAndView();
 	    User userExists = userService.findUserByUserName(user.getUsername());
 	    if (userExists != null) {
@@ -50,6 +56,7 @@ public class MainController {
 	    modelAndView.setViewName("registration");
 	} else {
 	    userService.saveUser(user);
+	    mailService.sendMail(user.getEmail(), "Confirm registration", "User has been registered successfully");
 	    modelAndView.addObject("successMessage", "User has been registered successfully");
 	    modelAndView.addObject("user", new User());
 	    modelAndView.setViewName("registration");
@@ -65,7 +72,7 @@ public class MainController {
 	    User user = userService.findUserByUserName(auth.getName());
 	    modelAndView.addObject("userName", "Welcome " + user.getUsername() + " / " + user.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("admin/home");
+		modelAndView.setViewName("admin/admin-home");
 	    return modelAndView;
 	}
 

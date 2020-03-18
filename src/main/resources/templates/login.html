@@ -3,37 +3,37 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Spring Security Tutorial</title>
+    <title>Login page</title>
+    <!-- 
     <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
     <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.4.1-1/css/bootstrap.min.css}"/>
-    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.12.0/css/all.css} "/>
+    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.12.0/css/all.css} "/>  -->
 </head>
 
 <body>
-<form th:action="@{/registration}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-</form>
 
-<div class="container">
-    <form th:action="@{/login}" method="POST" class="form-signin">
-        <h3 class="form-signin-heading" th:text="Welcome"></h3>
-        <br/>
+	<a th:href="@{/registration}"><button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button></a>
 
-        <input type="text" id="user_name" name="username" placeholder="User Name"
-               class="form-control"/> <br/>
-        <input type="password" th:placeholder="Password"
-               id="password" name="password" class="form-control"/> <br/>
 
-        <div align="center" th:if="${param.error}">
-            <p style="font-size: 20; color: #FF1C19;">User Name or Password invalid, please verify</p>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
-                th:text="Login"></button>
-    </form>
-</div>
+	<div class="container">
+	    <form th:action="@{/login}" method="POST" class="form-signin">
+	
+	        <input type="text" id="user_name" name="username" placeholder="User Name"
+	               class="form-control"/> <br/>
+	        <input type="password" th:placeholder="Password"
+	               id="password" name="password" class="form-control"/> <br/>
+	
+	        <div align="center" th:if="${param.error}">
+	            <p style="font-size: 20; color: #FF0000;">User Name or Password invalid, please verify</p>
+	        </div>
+	        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
+	                th:text="Login"></button>
+	    </form>
+	</div>
+<!--  
 <script type="text/javascript" th:src="@{webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{webjars/bootstrap/4.4.1-1/js/bootstrap.min.js}"></script>
-<script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+<script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script> -->
 </body>
 </html>
