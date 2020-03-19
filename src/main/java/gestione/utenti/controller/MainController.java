@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import gestione.utenti.model.User;
@@ -97,6 +95,7 @@ public class MainController {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    User user = userService.findUserByUserName(auth.getName());
 	    User updateUser = userService.updateUsername(user, user.getId());
+	    modelAndView.addObject("userName", updateUser.getUsername());
 	    
 		modelAndView.setViewName("admin/admin-home");
 	    return modelAndView;
