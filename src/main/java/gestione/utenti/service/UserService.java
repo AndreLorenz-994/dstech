@@ -1,8 +1,8 @@
 package gestione.utenti.service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,7 +33,7 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 
-	public User saveUser(User user) {
+	public User saveAdmin(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(true);
 		Role userRole = roleRepository.findByRole("ADMIN");
@@ -41,8 +41,13 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
-	public User updateUsername(User user, Long id) {
-		user.setId(id);
+	public User updateUsername(User user, String username) {
+		user.setUsername(username);
+		return userRepository.save(user);
+	}	
+	
+	public User updateBirthday(User user, Date birthday) {
+		user.setDateOfBirth(birthday);
 		return userRepository.save(user);
 	}	
 

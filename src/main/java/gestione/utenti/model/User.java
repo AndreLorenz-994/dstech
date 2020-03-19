@@ -27,7 +27,7 @@ public class User {
 	private String email;
 	private String password;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy") // date will be formatted in yyyy-MM-dd
+	@DateTimeFormat(pattern = "dd/MM/yyyy") // date will be formatted in dd/MM/yyyy
 	private Date dateOfBirth;
 	
     private Boolean active;	
