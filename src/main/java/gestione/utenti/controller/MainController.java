@@ -80,22 +80,36 @@ public class MainController {
 	    return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/modify-username", method = RequestMethod.GET)
-	public String getParameter(@RequestParam Long id, @RequestParam String username, Model model) {
+	@RequestMapping(value="/admin/modify-username", method = RequestMethod.POST)
+	public ModelAndView getParameter() {
+	    ModelAndView modelAndView = new ModelAndView();
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userService.findUserByUserName(auth.getName());
+	    modelAndView.addObject("user", user);
 
-		model.addAttribute("id", id);
-		model.addAttribute("username", username);
+		modelAndView.setViewName("admin/modify-username");
+	    return modelAndView;		
 		
-		return "admin/modify-username";
+/*
+		model.addAttribute("id", user.getId());
+		model.addAttribute("username", user.getUsername());
+		
+		return "admin/modify-username"; */
 	}	
 	
-	@RequestMapping(value="/admin/modify-username", method = RequestMethod.POST)
-	public String updateUsername (@RequestParam Long id, @RequestParam String username, Model model) {
-		User updUser = userService.updateUsername(id, username);
-		model.addAttribute("id", id);
-		model.addAttribute("username", username);		
+	@RequestMapping(value="/admin/home", method = RequestMethod.POST)
+	public ModelAndView updateUsername () {
+	    ModelAndView modelAndView = new ModelAndView();
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userService.findUserByUserName(auth.getName());
+	    User updateUser = userService.updateUsername(user, user.getId());
+	    
+		modelAndView.setViewName("admin/admin-home");
+	    return modelAndView;
+		/*
+		User updUser = userService.updateUsername(user, user.getId());		
 		if(updUser == null) return "No such user";
-		return "admin/modify-username";
+		return "admin/modify-username"; */
 	}  
 	
 }

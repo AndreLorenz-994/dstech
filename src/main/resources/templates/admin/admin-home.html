@@ -12,7 +12,11 @@
 			<table>
 				<tr>
 					<td th:text="${userName}">Username</td>
-					<td>Click <a href="#" th:href="@{/admin/modify-username(id=${id}, username=${userName})}">here</a> for modify</td>
+					<td>
+						<form th:action="@{/admin/modify-username}" method="post">
+							<input type="submit" value="Click here to modify">
+						</form>
+					</td>
 				</tr>	
 				<tr>
 					<td th:text="${birthDay}">Birthday</td>

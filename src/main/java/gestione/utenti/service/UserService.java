@@ -41,15 +41,9 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
-	public User updateUsername(Long id, String userName) {
-		Optional<User> pUser = userRepository.findById(id);
-		if(pUser.isPresent()) {
-			User user = pUser.get();
-		    user.setUsername(userName);
-		    return userRepository.save(user);	
-		} else {
-			return null;
-		}		
+	public User updateUsername(User user, Long id) {
+		user.setId(id);
+		return userRepository.save(user);
 	}	
 
 }
