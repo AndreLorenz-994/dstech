@@ -89,12 +89,6 @@ public class MainController {
 
 		modelAndView.setViewName("admin/modify-username");
 	    return modelAndView;		
-		
-/*
-		model.addAttribute("id", user.getId());
-		model.addAttribute("username", user.getUsername());
-		
-		return "admin/modify-username"; */
 	}	
 	
 	@RequestMapping(value="/admin/home", method = RequestMethod.POST)
@@ -106,10 +100,6 @@ public class MainController {
 	    
 		modelAndView.setViewName("admin/admin-home");
 	    return modelAndView;
-		/*
-		User updUser = userService.updateUsername(user, user.getId());		
-		if(updUser == null) return "No such user";
-		return "admin/modify-username"; */
 	}  
 	
 }

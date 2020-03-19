@@ -5,7 +5,7 @@
 		<title>Modify username</title>
 	</head>
 	<body>
-		<form th:action="@{/admin/admin-home}" th:object="${user}" method="post">
+		<form th:action="@{/admin/home}" th:object="${user}" method="post">
 			<input type="text" th:field="*{username}" th:attr="placeholder=#{username}" />
 			<input type="submit" value="Modify">
 		</form>
