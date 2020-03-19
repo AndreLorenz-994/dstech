@@ -91,6 +91,14 @@ public class MainController {
 		modelAndView.setViewName("admin/admin-upload");
 	    return modelAndView;
 	}	
+	
+	@RequestMapping(value="/admin/upload", method = RequestMethod.POST)
+	public ModelAndView updatePicture (@RequestParam("file") MultipartFile file) {
+		ModelAndView modelAndView = new ModelAndView();
+		Image image = imageService.storeFile(file);
+		modelAndView.setViewName("admin/admin-upload");
+		return modelAndView;
+	}	
 
 	@RequestMapping(value="/admin/modify-username", method = RequestMethod.GET)
 	public ModelAndView getUsernameParameter() {
@@ -140,4 +148,5 @@ public class MainController {
 	    return modelAndView;
 	} 
 	
+
 }
