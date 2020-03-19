@@ -13,9 +13,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import gestione.utenti.model.Image;
 import gestione.utenti.model.User;
+import gestione.utenti.service.ImageService;
 import gestione.utenti.service.MailService;
 import gestione.utenti.service.UserService;
 
@@ -27,6 +30,9 @@ public class MainController {
 	
 	@Autowired
 	private MailService mailService;	
+	
+	@Autowired
+	private ImageService imageService;		
 	
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
@@ -78,6 +84,13 @@ public class MainController {
 		modelAndView.setViewName("admin/admin-home");
 	    return modelAndView;
 	}
+	
+	@RequestMapping(value="/admin/upload", method = RequestMethod.GET)
+	public ModelAndView addProfilePicturePage(){
+	    ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/admin-upload");
+	    return modelAndView;
+	}	
 
 	@RequestMapping(value="/admin/modify-username", method = RequestMethod.GET)
 	public ModelAndView getUsernameParameter() {

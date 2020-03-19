@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,6 +36,10 @@ public class User {
     @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;	
+    
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_image", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "image_id"))
+    private Image image;
 
 	public String getPassword() {
 		return password;
@@ -83,6 +88,14 @@ public class User {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}	
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 	public Set<Role> getRoles() {
