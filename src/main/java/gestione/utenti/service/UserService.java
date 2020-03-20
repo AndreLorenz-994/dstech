@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import gestione.utenti.model.User;
+import gestione.utenti.model.Image;
 import gestione.utenti.model.Role;
 import gestione.utenti.repository.RoleRepository;
 import gestione.utenti.repository.UserRepository;
@@ -49,6 +50,12 @@ public class UserService {
 	public User updateBirthday(User user, Date birthday) {
 		user.setDateOfBirth(birthday);
 		return userRepository.save(user);
+	}
+
+	public void uploadImage(User user, Image image) {
+		// TODO Auto-generated method stub
+		user.setImage(image);
+		userRepository.save(user);
 	}	
 
 }

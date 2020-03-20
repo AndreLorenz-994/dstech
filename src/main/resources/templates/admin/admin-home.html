@@ -13,17 +13,23 @@
 				<tr>
 					<td th:text="${userName}">Username</td>
 					<td>
-						<form th:action="@{/admin/modify-username}" method="post">
+						<form th:action="@{/admin/modify-username}" method="get">
 							<input type="submit" value="Click here to modify">
 						</form>
 					</td>
 				</tr>	
 				<tr>
 					<td th:text="${birthDay}">Birthday</td>
-					<td>Click <a href="#" th:href="@{/modify-birthday}">here</a> for modify</td>
+					<td>						
+						<form th:action="@{/admin/modify-birthday}" method="get">
+							<input type="submit" value="Click here to modify">
+						</form>
+					</td>
 				</tr>								
 							
 			</table>
+			
+			<a href="#" th:href="@{/admin/upload}">Click here for add a profile image</a>
 		</div>
 		
 	</body>

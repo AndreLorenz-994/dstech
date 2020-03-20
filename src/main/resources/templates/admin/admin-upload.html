@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add profile picture</title>
+</head>
+<body>
+	<form th:action="@{/admin/upload}" method="post" enctype="multipart/form-data">
+		<input type="file" name="file" />
+		<input type="submit" value="Add" />
+	</form>
+	
+	<p th:text="${msg}">Profile image test</p>
+</body>
+</html>

@@ -2,14 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>Modify username</title>
+		<title>Modify Birthday Date</title>
 	</head>
 	<body>
-		<form th:action="@{/admin/modify-username}" th:object="${user}" method="post">
-			<input type="text" th:field="*{username}" th:attr="placeholder=#{username}" />
+		<form th:action="@{/admin/modify-birthday}" th:object="${user}" method="post">
+			<input type="text" th:field="*{dateOfBirth}" th:attr="placeholder=#{username}" />
 			<input type="submit" value="Modify">
 		</form>
-		<p th:text="${successUpdate}">Success message</p>
 		<a href="#" th:href="@{/admin/home}">Back to homepage</a>
 	</body>
 </html>

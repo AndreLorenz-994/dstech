@@ -96,6 +96,9 @@ public class MainController {
 	public ModelAndView updatePicture (@RequestParam("file") MultipartFile file) {
 		ModelAndView modelAndView = new ModelAndView();
 		Image image = imageService.storeFile(file);
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userService.findUserByUserName(auth.getName());
+	    userService.uploadImage(user, image);
 		modelAndView.setViewName("admin/admin-upload");
 		return modelAndView;
 	}	
