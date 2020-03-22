@@ -1,6 +1,7 @@
 package gestione.utenti.service;
 
 import java.util.HashSet;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -47,7 +48,7 @@ public class UserService {
 		return userRepository.save(user);
 	}	
 	
-	public User updateBirthday(User user, Date birthday) {
+	public User updateBirthday(User user, LocalDate birthday) {
 		user.setDateOfBirth(birthday);
 		return userRepository.save(user);
 	}

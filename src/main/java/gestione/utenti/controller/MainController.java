@@ -1,5 +1,6 @@
 package gestione.utenti.controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.mail.MessagingException;
@@ -60,16 +61,11 @@ public class MainController {
 	                .rejectValue("userName", "error.user",
 	                    "There is already a user registered with the user name provided");
 		}
-		if (bindingResult.hasErrors()) {
-		    modelAndView.setViewName("registration");
-		} else {
-		    userService.saveAdmin(user);
-		    mailService.sendMail(user.getEmail(), "Confirm registration", "User has been registered successfully");
-		    modelAndView.addObject("successMessage", "User has been registered successfully");
-		    modelAndView.addObject("user", new User());
-		    modelAndView.setViewName("registration");
-		
-	    }
+	    userService.saveAdmin(user);
+	    mailService.sendMail(user.getEmail(), "Confirm registration", "User has been registered successfully");
+	    modelAndView.addObject("successMessage", "User has been registered successfully");
+	    modelAndView.addObject("user", new User());
+	    modelAndView.setViewName("registration");
 	    return modelAndView;
 	}
 	
@@ -139,7 +135,7 @@ public class MainController {
 
 	
 	@RequestMapping(value="/admin/modify-birthday", method = RequestMethod.POST)
-	public ModelAndView updateBirthday (@RequestParam Date dateOfBirth) {
+	public ModelAndView updateBirthday (@RequestParam LocalDate dateOfBirth) {
 	    ModelAndView modelAndView = new ModelAndView();
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    User user = userService.findUserByUserName(auth.getName());

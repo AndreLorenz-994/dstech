@@ -1,5 +1,6 @@
 package gestione.utenti.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -17,6 +18,9 @@ import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sun.istack.NotNull;
+
 @Entity
 public class User {
 	
@@ -28,8 +32,9 @@ public class User {
 	private String email;
 	private String password;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy") // date will be formatted in dd/MM/yyyy
-	private Date dateOfBirth;
+	@NotNull
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private LocalDate dateOfBirth;
 	
     private Boolean active;	
 	
@@ -74,11 +79,11 @@ public class User {
 		this.email = email;
 	}
 	
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}	
 
